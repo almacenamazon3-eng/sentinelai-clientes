@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SentinelAI — Soporte_V1.2</title>
+  <title>SentinelAI — Soporte</title>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -59,7 +59,7 @@
   <div class="header">
     <div class="logo">🛡️</div>
     <div class="header-text">
-      <h1>SentinelAI Soporte_V1.1</h1>
+      <h1>SentinelAI Soporte</h1>
       <p>Registro de caso — Soporte técnico</p>
     </div>
   </div>
@@ -160,7 +160,7 @@ const LAMBDA_URL = 'https://wun6wm3539.execute-api.us-east-1.amazonaws.com/defau
 
 // Inicializar Telegram Web App
 const tg = window.Telegram?.WebApp;
-if (tg) { tg.ready(); }
+if (tg) { tg.ready(); tg.expand(); }
 
 function chk() {
   const camposOk = ['nombre','empresa','cuenta','telefono','correo','problema','afectacion']
