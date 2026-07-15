@@ -295,6 +295,9 @@
   <div class="tag">Caso registrado</div>
   <h2>¡Recibimos tu caso!</h2>
   <p>Un ingeniero de <strong>SentinelAI</strong> te atenderá en breve.<br><br>⏱ Tiempo estimado: <strong>15 minutos</strong><br><br>Puedes seguir escribiendo en el chat de Telegram.</p>
+  <div id="contador" style="margin-top:1.5rem; font-size:13px; color:var(--muted);">
+    Esta ventana se cerrará en <strong id="seg">5</strong> segundos...
+  </div>
 </div>
 
 <script>
@@ -335,7 +338,16 @@ async function enviar() {
     document.getElementById('formWrap').style.display = 'none';
     document.getElementById('okScreen').style.display = 'block';
 
-    if (tg) tg.close();
+    // Contador de 5 segundos antes de cerrar
+    let seg = 5;
+    const intervalo = setInterval(() => {
+      seg--;
+      document.getElementById('seg').textContent = seg;
+      if (seg <= 0) {
+        clearInterval(intervalo);
+        if (tg) tg.close();
+      }
+    }, 1000);
 
   } catch(e) {
     btn.disabled = false;
