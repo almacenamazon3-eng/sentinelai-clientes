@@ -7,223 +7,50 @@
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --bg:        #0d1117;
-      --surface:   #161b22;
-      --border:    #30363d;
-      --accent:    #58a6ff;
-      --accent2:   #3fb950;
-      --danger:    #f85149;
-      --text:      #e6edf3;
-      --muted:     #8b949e;
-      --radius:    10px;
+      --bg:      #0d1117;
+      --surface: #161b22;
+      --border:  #30363d;
+      --accent:  #58a6ff;
+      --accent2: #3fb950;
+      --danger:  #f85149;
+      --text:    #e6edf3;
+      --muted:   #8b949e;
+      --radius:  10px;
     }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      padding: 1.25rem 1rem 2rem;
-    }
-
-    .header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 1.5rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .logo {
-      width: 40px;
-      height: 40px;
-      background: linear-gradient(135deg, #58a6ff 0%, #3fb950 100%);
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      flex-shrink: 0;
-    }
-
-    .header-text h1 {
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--text);
-    }
-
-    .header-text p {
-      font-size: 12px;
-      color: var(--muted);
-      margin-top: 2px;
-    }
-
-    .alert {
-      background: rgba(88, 166, 255, 0.08);
-      border: 1px solid rgba(88, 166, 255, 0.2);
-      border-radius: var(--radius);
-      padding: .75rem 1rem;
-      font-size: 13px;
-      color: var(--accent);
-      margin-bottom: 1.25rem;
-      line-height: 1.5;
-    }
-
-    .f {
-      margin-bottom: 1rem;
-    }
-
-    .f label {
-      display: block;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: .05em;
-      margin-bottom: 6px;
-    }
-
-    .f label .r {
-      color: var(--danger);
-      margin-left: 2px;
-    }
-
-    .f input,
-    .f textarea,
-    .f select {
-      width: 100%;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      color: var(--text);
-      font-size: 14px;
-      padding: 10px 12px;
-      transition: border-color .15s;
-      outline: none;
-      font-family: inherit;
-    }
-
-    .f input:focus,
-    .f textarea:focus,
-    .f select:focus {
-      border-color: var(--accent);
-    }
-
-    .f input.error,
-    .f textarea.error {
-      border-color: var(--danger);
-    }
-
-    .f textarea {
-      resize: vertical;
-      min-height: 90px;
-      line-height: 1.5;
-    }
-
-    .f .em {
-      font-size: 11px;
-      color: var(--danger);
-      margin-top: 4px;
-      display: none;
-    }
-
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 1.25rem 1rem 2rem; }
+    .header { display: flex; align-items: center; gap: 12px; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
+    .logo { width: 40px; height: 40px; background: linear-gradient(135deg, #58a6ff 0%, #3fb950 100%); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+    .header-text h1 { font-size: 15px; font-weight: 600; }
+    .header-text p { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .alert { background: rgba(88,166,255,.08); border: 1px solid rgba(88,166,255,.2); border-radius: var(--radius); padding: .75rem 1rem; font-size: 13px; color: var(--accent); margin-bottom: 1.25rem; line-height: 1.5; }
+    .f { margin-bottom: 1rem; }
+    .f label { display: block; font-size: 12px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 6px; }
+    .f label .r { color: var(--danger); margin-left: 2px; }
+    .f input, .f textarea, .f select { width: 100%; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); font-size: 14px; padding: 10px 12px; transition: border-color .15s; outline: none; font-family: inherit; }
+    .f input:focus, .f textarea:focus, .f select:focus { border-color: var(--accent); }
+    .f textarea { resize: vertical; min-height: 100px; line-height: 1.5; }
+    .f select option { background: var(--surface); }
+    .f .em { font-size: 11px; color: var(--danger); margin-top: 4px; display: none; }
     .f.bad .em { display: block; }
-    .f.bad input,
-    .f.bad textarea { border-color: var(--danger); }
-
-    .g2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-
-    .divider {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      margin: 1.25rem 0 .75rem;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .divider::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
-
-    .btn {
-      width: 100%;
-      padding: 13px;
-      background: var(--accent);
-      color: #0d1117;
-      border: none;
-      border-radius: var(--radius);
-      font-size: 15px;
-      font-weight: 700;
-      cursor: pointer;
-      margin-top: 1.25rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      transition: opacity .15s;
-    }
-
+    .f.bad input, .f.bad textarea, .f.bad select { border-color: var(--danger); }
+    .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .divider { font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; margin: 1.25rem 0 .75rem; display: flex; align-items: center; gap: 8px; }
+    .divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .checks { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 4px; }
+    .check-item { display: flex; align-items: center; gap: 8px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 9px 12px; font-size: 13px; cursor: pointer; transition: border-color .15s, color .15s; }
+    .check-item:hover { border-color: var(--accent); }
+    .check-item input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--accent); cursor: pointer; flex-shrink: 0; }
+    .btn { width: 100%; padding: 13px; background: var(--accent); color: #0d1117; border: none; border-radius: var(--radius); font-size: 15px; font-weight: 700; cursor: pointer; margin-top: 1.25rem; display: flex; align-items: center; justify-content: center; gap: 8px; transition: opacity .15s; }
     .btn:disabled { opacity: .4; cursor: not-allowed; }
     .btn:not(:disabled):hover { opacity: .85; }
-
-    .spin {
-      width: 14px; height: 14px;
-      border: 2px solid rgba(13,17,23,.3);
-      border-top-color: #0d1117;
-      border-radius: 50%;
-      animation: sp .6s linear infinite;
-    }
+    .spin { width: 14px; height: 14px; border: 2px solid rgba(13,17,23,.3); border-top-color: #0d1117; border-radius: 50%; animation: sp .6s linear infinite; }
     @keyframes sp { to { transform: rotate(360deg); } }
-
-    .ok {
-      display: none;
-      text-align: center;
-      padding: 3rem 1rem;
-    }
-
-    .ok-icon {
-      font-size: 56px;
-      margin-bottom: 1rem;
-    }
-
-    .ok h2 {
-      font-size: 20px;
-      font-weight: 700;
-      margin-bottom: .5rem;
-      color: var(--accent2);
-    }
-
-    .ok p {
-      font-size: 14px;
-      color: var(--muted);
-      line-height: 1.6;
-    }
-
-    .tag {
-      display: inline-block;
-      background: rgba(63,185,80,.1);
-      color: var(--accent2);
-      border: 1px solid rgba(63,185,80,.2);
-      border-radius: 6px;
-      font-size: 11px;
-      font-weight: 600;
-      padding: 2px 8px;
-      margin-bottom: 1rem;
-    }
+    .ok { display: none; text-align: center; padding: 3rem 1rem; }
+    .ok-icon { font-size: 56px; margin-bottom: 1rem; }
+    .ok h2 { font-size: 20px; font-weight: 700; margin-bottom: .5rem; color: var(--accent2); }
+    .ok p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+    .tag { display: inline-block; background: rgba(63,185,80,.1); color: var(--accent2); border: 1px solid rgba(63,185,80,.2); border-radius: 6px; font-size: 11px; font-weight: 600; padding: 2px 8px; margin-bottom: 1rem; }
   </style>
 </head>
 <body>
@@ -241,7 +68,6 @@
     📋 Completa este formulario para que un ingeniero pueda atenderte lo antes posible.
   </div>
 
-  <!-- Datos personales -->
   <div class="divider">Datos de contacto</div>
 
   <div class="f" id="f-nombre">
@@ -257,8 +83,9 @@
       <div class="em">Requerido</div>
     </div>
     <div class="f" id="f-cuenta">
-      <label>No. de cuenta</label>
-      <input type="text" id="cuenta" placeholder="Ej: 200361066">
+      <label>No. de cuenta <span class="r">*</span></label>
+      <input type="text" id="cuenta" placeholder="Ej: 200361066" oninput="chk()">
+      <div class="em">Requerido</div>
     </div>
   </div>
 
@@ -275,12 +102,38 @@
     </div>
   </div>
 
-  <!-- Descripción del problema -->
+  <div class="divider">Clasificación del caso</div>
+
+  <div class="f" id="f-dispositivo">
+    <label>Dispositivo afectado <span class="r">*</span></label>
+    <div class="checks">
+      <label class="check-item"><input type="checkbox" name="dispositivo" value="PBX" onchange="chk()"> PBX</label>
+      <label class="check-item"><input type="checkbox" name="dispositivo" value="Hardphone" onchange="chk()"> Hardphone</label>
+      <label class="check-item"><input type="checkbox" name="dispositivo" value="Softphone" onchange="chk()"> Softphone</label>
+      <label class="check-item"><input type="checkbox" name="dispositivo" value="Aheeva" onchange="chk()"> Aheeva</label>
+      <label class="check-item"><input type="checkbox" name="dispositivo" value="Otro" onchange="chk()"> Otro</label>
+    </div>
+    <div class="em" id="em-dispositivo">Selecciona al menos un dispositivo</div>
+  </div>
+
+  <div class="f" id="f-afectacion">
+    <label>Tipo de afectación <span class="r">*</span></label>
+    <select id="afectacion" onchange="chk()">
+      <option value="">— Selecciona —</option>
+      <option value="Falla general - teléfonos sin servicio">Falla general — teléfonos sin servicio</option>
+      <option value="Sin llamadas entrada/salida">Sin llamadas entrada/salida</option>
+      <option value="Teléfonos no registrados">Teléfonos no registrados</option>
+      <option value="Registrar nuevas extensiones">Registrar nuevas extensiones</option>
+      <option value="Otro">Otro</option>
+    </select>
+    <div class="em">Requerido</div>
+  </div>
+
   <div class="divider">Descripción del problema</div>
 
   <div class="f" id="f-problema">
     <label>Describe tu problema <span class="r">*</span></label>
-    <textarea id="problema" placeholder="Explica con detalle qué está pasando, desde cuándo y qué has intentado..." oninput="chk()"></textarea>
+    <textarea id="problema" placeholder="Por favor incluye:&#10;• Fecha y hora en que inició el problema&#10;• Equipos o extensiones afectadas&#10;• Número de usuarios sin servicio&#10;• Acciones que ya realizaste para resolverlo" oninput="chk()"></textarea>
     <div class="em">Por favor describe tu problema</div>
   </div>
 
@@ -305,10 +158,15 @@
 <script>
 const LAMBDA_URL = 'https://wun6wm3539.execute-api.us-east-1.amazonaws.com/default/sentinelai-telegram-slack';
 
+// Inicializar Telegram Web App
+const tg = window.Telegram?.WebApp;
+if (tg) { tg.ready(); tg.expand(); }
+
 function chk() {
-  const ok = ['nombre','empresa','telefono','correo','problema']
+  const camposOk = ['nombre','empresa','cuenta','telefono','correo','problema','afectacion']
     .every(id => document.getElementById(id).value.trim());
-  document.getElementById('btnEnviar').disabled = !ok;
+  const dispositivoOk = document.querySelectorAll('input[name="dispositivo"]:checked').length > 0;
+  document.getElementById('btnEnviar').disabled = !(camposOk && dispositivoOk);
 }
 
 async function enviar() {
@@ -316,18 +174,19 @@ async function enviar() {
   btn.disabled = true;
   btn.innerHTML = '<span class="spin"></span> Enviando...';
 
-  const tg = window.Telegram?.WebApp;
   const user = tg?.initDataUnsafe?.user;
 
   const payload = {
-    action:   'form_submit',
-    chat_id:  user?.id || null,
-    nombre:   document.getElementById('nombre').value.trim(),
-    empresa:  document.getElementById('empresa').value.trim(),
-    cuenta:   document.getElementById('cuenta').value.trim(),
-    telefono: document.getElementById('telefono').value.trim(),
-    correo:   document.getElementById('correo').value.trim(),
-    problema: document.getElementById('problema').value.trim(),
+    action:       'form_submit',
+    chat_id:      user?.id ? String(user.id) : null,
+    nombre:       document.getElementById('nombre').value.trim(),
+    empresa:      document.getElementById('empresa').value.trim(),
+    cuenta:       document.getElementById('cuenta').value.trim(),
+    telefono:     document.getElementById('telefono').value.trim(),
+    correo:       document.getElementById('correo').value.trim(),
+    dispositivos: Array.from(document.querySelectorAll('input[name="dispositivo"]:checked')).map(c => c.value).join(', '),
+    afectacion:   document.getElementById('afectacion').value,
+    problema:     document.getElementById('problema').value.trim(),
   };
 
   try {
@@ -340,7 +199,7 @@ async function enviar() {
     document.getElementById('formWrap').style.display = 'none';
     document.getElementById('okScreen').style.display = 'block';
 
-    // Contador de 5 segundos antes de cerrar
+    // Contador de 8 segundos antes de cerrar
     let seg = 8;
     const intervalo = setInterval(() => {
       seg--;
@@ -356,12 +215,6 @@ async function enviar() {
     btn.innerHTML = '↩ Reintentar';
     alert('Error al enviar. Verifica tu conexión.');
   }
-}
-
-// Inicializar Telegram Web App
-if (window.Telegram?.WebApp) {
-  window.Telegram.WebApp.ready();
-  window.Telegram.WebApp.expand();
 }
 </script>
 </body>
